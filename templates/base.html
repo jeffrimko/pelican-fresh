@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>{% block title %}{%endblock%}{{ SITENAME }}</title>
+        <title>{% block title %}{%endblock%}{{SITENAME}}</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap-responsive.min.css" type="text/css" />
+        <link rel="stylesheet" href="{{SITEURL}}/theme/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="{{SITEURL}}/theme/css/bootstrap-responsive.min.css" type="text/css" />
 
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="{{SITEURL}}/theme/css/main.css" type="text/css" />
         {% if FEED_ALL_ATOM %}
-        <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        <link href="{{FEED_DOMAIN}}/{{FEED_ALL_ATOM}}" type="application/atom+xml" rel="alternate" title="{{SITENAME}} Atom Feed" />
         {% endif %}
         {% if FEED_ALL_RSS %}
-        <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        <link href="{{FEED_DOMAIN}}/{{FEED_ALL_RSS}}" type="application/rss+xml" rel="alternate" title="{{SITENAME}} RSS Feed" />
         {% endif %}
 
         <script type="text/javascript">var switchTo5x=true;</script>
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">
             stLight.options({
-                publisher: "{{ SHARETHIS_PUB_KEY }}",
+                publisher: "{{SHARETHIS_PUB_KEY}}",
                 doNotHash: false,
                 doNotCopy: false,
                 hashAddressBar: false
@@ -34,22 +34,22 @@
         <div class="span10 offset1">
             <header id="banner" >
                 <h1>
-                    <a href="{{ SITEURL }}/">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a>
+                    <a href="{{SITEURL}}/">{{SITENAME}} {% if SITESUBTITLE %} <strong>{{SITESUBTITLE}}</strong>{% endif %}</a>
                 </h1>
                 <nav class="navbar">
                     <div class="navbar-inner">
                         <ul class="nav">
                         {% for title, link in MENUITEMS %}
-                            <li><a href="{{ link }}">{{ title }}</a></li>
+                            <li><a href="{{link}}">{{title|lower}}</a></li>
                         {% endfor %}
                         {% if DISPLAY_PAGES_ON_MENU %}
-                        {% for page in PAGES %}
-                            <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
+                        {% for p in PAGES %}
+                        <li {% if page %}{% if page.title == p.title %}class="active"{% endif %}{% endif %}><a href="{{SITEURL}}/{{p.url}}">{{p.title|lower}}</a></li>
                         {% endfor %}
                         {% endif %}
                         {% if not HIDE_CATEGORIES_FROM_MENU %}
                         {% for cat, null in categories %}
-                            <li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                            <li {% if cat == category %}class="active"{% endif %}><a href="{{SITEURL}}/{{cat.url}}">{{cat|lower}}</a></li>
                         {% endfor %}
                         {% endif %}
                         </ul>
@@ -75,7 +75,7 @@
                                 <h2>Links</h2>
                                 <ul>
                                 {% for name, link in LINKS %}
-                                    <li><a href="{{ link }}">{{ name }}</a></li>
+                                    <li><a href="{{link}}">{{name}}</a></li>
                                 {% endfor %}
                                 </ul>
                             </div><!-- /.Links -->
@@ -84,13 +84,13 @@
                             <div>
                                 <h2>Social</h2>
                                 <ul>
-                                    <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                                    <li><a href="{{FEED_DOMAIN}}/{{FEED_ALL_ATOM}}" type="application/atom+xml" rel="alternate">atom feed</a></li>
                                     {% if FEED_ALL_RSS %}
-                                    <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate">rss feed</a></li>
+                                    <li><a href="{{FEED_DOMAIN}}/{{FEED_ALL_RSS}}" type="application/rss+xml" rel="alternate">rss feed</a></li>
                                     {% endif %}
 
                                 {% for name, link in SOCIAL %}
-                                    <li><a href="{{ link }}">{{ name }}</a></li>
+                                    <li><a href="{{link}}">{{name}}</a></li>
                                 {% endfor %}
                                 </ul>
                             </div><!-- /.social -->
@@ -100,7 +100,7 @@
                                 <h2>Tags</h2>
                                 <ul id="cloud">
                                      {% for tag in tag_cloud %}
-                                     <li class="tag-{{ tag.1 }}"><a href="{{ SITEURL }}/{{ tag.0.url }}">{{ tag.0 }}</a></li>
+                                     <li class="tag-{{tag.1}}"><a href="{{SITEURL}}/{{tag.0.url}}">{{tag.0}}</a></li>
                                      {% endfor %}
                                 </ul>
                              </div>
@@ -118,10 +118,6 @@
                     <p>
                         This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
                     </p>
-                    <p>
-                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a>.
-                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://twitter.github.com/bootstrap">Twitter Bootstrap</a>.
-                    </p>
                 </address>
             </div>
         </div>
@@ -131,6 +127,6 @@
 {% include 'piwik.html' %}
 {% include 'disqus_script.html' %}
     <script src="http://code.jquery.com/jquery.min.js"></script>
-    <script src="{{ SITEURL }}/theme/js/bootstrap.min.js"></script>
+    <script src="{{SITEURL}}/theme/js/bootstrap.min.js"></script>
 </body>
 </html>
